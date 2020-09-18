@@ -14,7 +14,6 @@ void print_array(int *arr, int arr_size) {
 	puts("");
 }
 
-// Change int to size_t
 int *bubble_sort(int *arr, size_t arr_size) {
 	short isSorted;
 	for (size_t i = 0; i < arr_size - 1; i++) {
