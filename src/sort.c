@@ -19,9 +19,9 @@ void print_array(int *arr, int arr_size) {
 // Change int to size_t
 int *bubble_sort(int *arr, size_t arr_size) {
 	short isSorted;
-	for (int i = 0; i < arr_size - 1; i++) {
+	for (size_t i = 0; i < arr_size - 1; i++) {
 		isSorted = 1;
-		for (int j = 0; j < arr_size - i - 1; j++) {
+		for (size_t j = 0; j < arr_size - i - 1; j++) {
 			if (arr[j] > arr[j+1]) {
 			    swap(&arr[j], &arr[j+1]);
 			    isSorted = 0;
@@ -44,7 +44,8 @@ int *insert_sort(int *arr, size_t arr_size) {
 			if (j > 0)
 			    j--;
 			else {
-				// j is of type size_t and can not be negative, so we set it to be equal arr_size instead of -1
+				// j is of type size_t and can not be negative,
+				// so we set it to be equal arr_size instead of -1
  				j=arr_size;
 			}
 		}
