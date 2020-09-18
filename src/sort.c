@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include "search.h"
 
 void swap(int *a, int *b) {
 	int tmp = *a;
