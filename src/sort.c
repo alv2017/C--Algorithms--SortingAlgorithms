@@ -14,6 +14,17 @@ void print_array(int *arr, int arr_size) {
 	puts("");
 }
 
+int *smallest_element(int *arr, size_t arr_size, size_t k) {
+	int *smallest = &arr[k];
+
+	for (int i = k + 1; i < arr_size; i++) {
+		if (*smallest > arr[i]) {
+			smallest = &arr[i];
+		}
+	}
+	return smallest;
+}
+
 int *bubble_sort(int *arr, size_t arr_size) {
 	short isSorted;
 	for (size_t i = 0; i < arr_size - 1; i++) {
@@ -55,4 +66,30 @@ int *insert_sort(int *arr, size_t arr_size) {
 	}
 	return arr;
 }
+
+int *selection_sort(int *arr, size_t arr_size){
+	int *smallest = NULL;
+	for (int i= 0; i < arr_size - 1; i++) {
+		smallest = smallest_element(arr, arr_size, i);
+		swap(smallest, &arr[i]);
+	}
+	return arr;
+}
+
+int main() {
+	int arr[10] = {23, 12, 3, 28, 4, 10, 1, 9, 15, 5};
+	printf("Initial array:\n");
+	print_array(arr, 10);
+
+	printf("Sorted array:\n");
+	selection_sort(arr, 10);
+	print_array(arr, 10);
+	return 0;
+}
+
+
+
+
+
+
 
