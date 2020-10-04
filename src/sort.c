@@ -25,6 +25,47 @@ int *smallest_element(int *arr, size_t arr_size, size_t k) {
 	return smallest;
 }
 
+int *merge(int *arr, int beg, int mid, int end) {
+	int i = beg;
+	int j = mid + 1;
+	int idx = 0;
+
+	int temp_size = end - beg + 1;
+	int *temp = calloc(temp_size, sizeof(int));
+
+	while (i <= mid && j <= end) {
+		if (arr[i] < arr[j]) {
+			temp[idx] = arr[i];
+			i++;
+		}
+		else {
+			temp[idx] = arr[j];
+			j++;
+		}
+		idx++;
+	}
+
+	if (i > mid) {
+		while (j <= end) {
+			temp[idx] = arr[j];
+			j++;
+			idx++;
+		}
+	}
+	else {
+		while (i <= mid) {
+			temp[idx] = arr[i];
+			i++;
+			idx++;
+		}
+	}
+	for (int k = beg; k <= end; k++) {
+		arr[k] = temp[k-beg];
+	}
+	free(temp);
+	return arr;
+}
+
 int *bubble_sort(int *arr, size_t arr_size) {
 	short isSorted;
 	for (size_t i = 0; i < arr_size - 1; i++) {
@@ -76,13 +117,25 @@ int *selection_sort(int *arr, size_t arr_size){
 	return arr;
 }
 
+int *merge_sort(int *arr, size_t arr_size) {
+	int beg =0;
+	int end = arr_size - 1;
+	if (beg < end) {
+		int mid = (beg + end) / 2;
+		merge_sort(arr, mid + 1);
+		merge_sort(&arr[mid+1], end - mid);
+		merge(arr, beg, mid, end);
+	}
+	return arr;
+}
+
 int main() {
-	int arr[10] = {23, 12, 3, 28, 4, 10, 1, 9, 15, 5};
+	int arr[12] = {23, 12, 3, 28, 4, 10, 7, 9, 15, 5, 100, 20};
 	printf("Initial array:\n");
 	print_array(arr, 10);
 
 	printf("Sorted array:\n");
-	selection_sort(arr, 10);
+	merge_sort(arr, 10);
 	print_array(arr, 10);
 	return 0;
 }
